@@ -1,0 +1,24 @@
+{
+  "name": "game-of-life-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gol.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon gol.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NBizzell/game-of-life-game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NBizzell/game-of-life-game/issues"
+  },
+  "homepage": "https://github.com/NBizzell/game-of-life-game#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
