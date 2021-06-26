@@ -82,7 +82,8 @@ function getNeighborCount(currGen, row, col) {
 }
 
 /**
- * function to calculate state for the next iteration
+ * function to calculate state for the next iteration based on
+ * game of life rules
  * 
  * @param {Number} input the number of neighbors
  * @param {Number} state the current state of the cell
@@ -101,15 +102,18 @@ function calculateStatus(input, state){
  * @returns {array} new array state
  */
 function produceNextGen(currGen){
+  //set up an array of 0's same size as initial array
   let nextGen =[]
-
   for (let row=0; row<rows; row++) {
     nextGen.push(new Array(cols).fill(0));
-};
+  };
 
+  //loop through the array and process each cell using the rules
   for(var i = 0; i < currGen.length; i++) {
     for(var j = 0; j < currGen[i].length; j++) {
+        //get number of neighbors
         let neighbours = getNeighborCount(currGen, i, j)
+        //set call to calculated value
         nextGen[i][j] = calculateStatus(neighbours, currGen[i][j])        
         }
   }
