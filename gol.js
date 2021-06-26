@@ -1,10 +1,16 @@
-
+/**
+ * function to count number of neighbors
+ *   
+ * @param {Array} currGen initial array state 
+ * @param {Number} row number of rows in array 
+ * @param {Array} col number of columns in array
+ * @returns {number} number of neighbors
+ */
 function getNeighborCount(currGen, row, col) {
   let count = 0;
   let nrow=Number(row);
   let ncol=Number(col);
-  let rows = currGen.length
-  let cols = currGen[0].length
+
     
   // Make sure we are not at the first row
   if (nrow - 1 >= 0) {
@@ -75,6 +81,13 @@ function getNeighborCount(currGen, row, col) {
   return count;
 }
 
+/**
+ * function to calculate state for the next iteration
+ * 
+ * @param {Number} input the number of neighbors
+ * @param {Number} state the current state of the cell
+ * @returns {Number} state for next iteration, 0 - dead cell, 1 - live cell
+ */
 function calculateStatus(input, state){
   let status = 0
   if ((state === 1 && input > 1 && input < 4) || (state === 0 && input === 3))
@@ -82,26 +95,40 @@ function calculateStatus(input, state){
   return status;
 }
 
+/**
+ * function to produce new array state from old array 
+ * @param {*} currGen current array state
+ * @returns {array} new array state
+ */
 function produceNextGen(currGen){
-  let nextGen = currGen
+  let nextGen =[]
+
+  for (let row=0; row<rows; row++) {
+    nextGen.push(new Array(cols).fill(0));
+};
+
   for(var i = 0; i < currGen.length; i++) {
     for(var j = 0; j < currGen[i].length; j++) {
         let neighbours = getNeighborCount(currGen, i, j)
-        console.log(currGen[i][j])
-        nextGen[i][j] = calculateStatus(neighbours, currGen[i][j])
-        console.log(i, j, currGen[i][j],nextGen[i][j], neighbours)
-    }
+        nextGen[i][j] = calculateStatus(neighbours, currGen[i][j])        
+        }
   }
   return nextGen
 }
 
+//sets initial array
 let array = [
-  [0,0,1,0,1,0],
-  [0,0,1,0,0,1],
   [0,0,1,0,0,0],
-  [0,1,0,1,0,0],
-  [0,1,1,1,0,0],
+  [0,0,1,0,0,0],
+  [0,0,1,0,0,0],
+  [0,0,0,0,0,0],
+  [0,0,0,0,0,0],
   [0,0,0,0,0,0]
 ]
-console.log(array)
-console.log(produceNextGen(array))
+//sets number of cols and rows
+let rows = array.length
+let cols = array[0].length
+
+//output to show process
+console.table(array)
+console.table(produceNextGen(array))
